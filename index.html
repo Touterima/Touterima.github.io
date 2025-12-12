@@ -27,6 +27,318 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <!-- Modal Styles -->
+  <style>
+    /* Modal Styles */
+    .project-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.9);
+      animation: fadeIn 0.3s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background-color: #fff;;
+      margin: 2% auto;
+      padding: 0;
+      width: 90%;
+      max-width: 1200px;
+      border-radius: 15px;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+      animation: slideDown 0.4s;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-header {
+      background:linear-gradient(135deg, #667eea 0%, #0563bb 100%);
+      padding: 10px;
+      border-radius: 15px 15px 0 0;
+      color: white;
+      position: relative;
+    }
+
+    .modal-header h2 {
+
+
+      font-size: 26px;
+  font-weight: 700;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 20px;
+  color: #fff;
+    }
+
+    .modal-header p {
+      margin: 10px 0 0 0;
+      opacity: 0.9;
+      font-size: 1.1rem;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 5px;
+      right: 30px;
+      color: #fff;
+      font-size: 35px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .close-modal:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(90deg);
+    }
+
+    .modal-body {
+      padding: 40px;
+      color: #45505b;
+    }
+
+    .project-images {
+      margin-bottom: 30px;
+    }
+
+    .image-slider {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .slider-image {
+      display: none;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #e0e0e0;
+    }
+
+    .slider-image.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
+      right: 15px;
+  bottom: 15px;
+  z-index: 996;
+
+      background: #0563bb;
+      width: 40px;
+      height: 40px;
+      border-radius: 50px;
+
+
+      color: white;
+      border: none;
+      font-size: 28px;
+      padding: 30;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .slider-nav:hover {
+      background: #667eea;
+      color: #fff;
+    }
+
+    .slider-nav.prev {
+      left: 10px;
+    }
+
+    .slider-nav.next {
+      right: 10px;
+    }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #0563bb;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .dot.active {
+      background: white;
+      width: 30px;
+      border-radius: 6px;
+    }
+
+    .project-description {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      line-height: 1.8;
+      font-size: 1.05rem;
+
+      border: 2px solid transparent;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .technologies-used {
+      margin-bottom: 30px;
+    }
+
+    .technologies-used h3 {
+
+
+      line-height: 18px;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  color: #0563bb;
+  margin-bottom: 10px;
+    }
+
+    .tech-icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .tech-icon {
+      background: #e0e0e0;
+      padding: 15px 25px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .tech-icon:hover {
+      border-color: #667eea;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .tech-icon img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    .tech-icon span {
+      font-weight: 500;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 30px;
+      background: linear-gradient(135deg, #667eea 0%, #0563bb 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      color: white;
+    }
+
+    .project-link i {
+      font-size: 1.2rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .modal-content {
+        width: 95%;
+        margin: 5% auto;
+      }
+
+      .modal-body {
+        padding: 20px;
+      }
+
+      .image-slider {
+        height: 300px;
+      }
+
+      .modal-header h2 {
+        font-size: 1.5rem;
+      }
+
+      .project-links {
+        flex-direction: column;
+      }
+    }
+
+    /* Cursor pointer for portfolio items */
+    .portfolio-item {
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+
   <!-- =======================================================
   * Template Name: MyResume
   * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
@@ -61,7 +373,7 @@
   <section id="hero" class="d-flex flex-column justify-content-center">
     <div class="container" data-aos="zoom-in" data-aos-delay="100">
       <h1>Rima Toute</h1>
-      <p>I'm <span class="typed" data-typed-items="an engineering student, a developer"></span></p>
+      <p>I'm <span class="typed" data-typed-items="a software engineer , a Full-Stack Developer"></span></p>
       <div class="social-links">
         
         <a href="rimatoute1@gmail.com" class="mail"><i class="bx bxl-gmail"></i></a>
@@ -297,7 +609,7 @@
     </section><!-- End Resume Section -->
 
     <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio section-bg">
+    <!--section id="portfolio" class="portfolio section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -362,11 +674,151 @@
             </div>
           </div>
 
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img src="assets/img/portfolio/R.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>APEK Association website </h4>
+                <p>Built with symfony</p>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img src="assets/img/portfolio/R.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>E_Tafa9na Note Management </h4>
+                <p>ReactJS Web App</p>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img src="assets/img/portfolio/R.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>InceptumJE Marketing Departement Portfolio </h4>
+                <p>CSS, HTML and JS</p>
+                
+              </div>
+            </div>
 
         </div>
 
       </div>
-    </section><!-- End Portfolio Section -->
+    </section-->
+    
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section-bg">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Portfolio</h2>
+          <p>Here, you'll discover a variety of projects demonstrating my skills. From mobile apps to web and desktop projects.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-app">App</li>
+              <li data-filter=".filter-card">Mobile</li>
+              <li data-filter=".filter-web">Web</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web" onclick="openProjectModal('wms')">
+            <div class="portfolio-wrap">
+              <img src="assets/img/portfolio/OIP.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Warehouse Management System</h4>
+                <p>Springboot web application</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web" onclick="openProjectModal('apek')">
+            <div class="portfolio-wrap">
+              <img src="assets/img/portfolio/R.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>APEK Association website </h4>
+                <p>Built with symfony</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web" onclick="openProjectModal('etafakna')">
+            <div class="portfolio-wrap">
+              <img src="assets/img/portfolio/R.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>E_Tafa9na Note Management </h4>
+                <p>ReactJS Web App</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app" onclick="openProjectModal('sportfit-desktop')">
+            <div class="portfolio-wrap">
+              <img src="assets/img/portfolio/OIP.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>SportFit</h4>
+                <p>Java descktop app</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web" onclick="openProjectModal('sportfit-web')">
+            <div class="portfolio-wrap">
+              <img src="assets/img/portfolio/OIP (1).jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>SportFit</h4>
+                <p>Symfony Web app</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app" onclick="openProjectModal('it-asset')">
+            <div class="portfolio-wrap">
+              <img src="assets/img/portfolio/3.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>IT asset management </h4>
+                <p>Web App</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card" onclick="openProjectModal('shopping')">
+            <div class="portfolio-wrap">
+              <img src="assets/img/portfolio/R.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>online shoping </h4>
+                <p>FlutterFlow Mobile App</p>
+              </div>
+            </div>
+          </div>
+
+          
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web" onclick="openProjectModal('inceptum')">
+            <div class="portfolio-wrap">
+              <img src="assets/img/portfolio/R.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>InceptumJE Marketing Departement Portfolio </h4>
+                <p>CSS, HTML and JS</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    
+    <!-- End Portfolio Section -->
     <!-------------  certifs section ------------>
 
     <section id="services" class="portfolio section-bg">
@@ -637,6 +1089,46 @@
   </footer><!-- End Footer -->
 
   <div id="preloader"></div>
+
+
+  <!-- Project Modal -->
+  <div id="projectModal" class="project-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close-modal" onclick="closeProjectModal()">&times;</span>
+        <h2 id="modalTitle">Project Title</h2>
+      </div>
+      <div class="modal-body">
+        <div class="project-images">
+          <div class="image-slider">
+            <button class="slider-nav prev" onclick="changeSlide(-1)">&#10094;</button>
+            <img class="slider-image active" src="" alt="Project screenshot 1">
+            <img class="slider-image" src="" alt="Project screenshot 2">
+            <img class="slider-image" src="" alt="Project screenshot 3">
+            <button class="slider-nav next" onclick="changeSlide(1)">&#10095;</button>
+            <div class="slider-dots"></div>
+          </div>
+        </div>
+
+        <div class="project-description" id="modalDescription">
+          Project description will appear here...
+        </div>
+
+        <div class="technologies-used">
+          <h3>Technologies Used</h3>
+          <div class="tech-icons" id="techIcons">
+            <!-- Tech icons will be inserted here dynamically -->
+          </div>
+        </div>
+
+        <div class="project-links" id="projectLinks">
+          <!-- Links will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!---------------------->
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
@@ -653,6 +1145,314 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+
+
+
+
+
+<!-- Project Modal script-->
+  <script>
+    // Project data
+    const projectsData = {
+      'wms': {
+        title: 'Warehouse Management System',
+        subtitle: 'Springboot Web Application',
+        description: 'A comprehensive warehouse management system built with Springboot. Features include inventory tracking, order processing, and reporting capabilities. The application uses Spring Boot for backend services and Angular18 for the frontend.',
+        images: [
+          'assets/img/portfolio/wms/login-wms.png',
+          'assets/img/portfolio/wms/register-wms.png',
+          'assets/img/portfolio/wms/CaptureTransfertStock.png',
+          'assets/img/portfolio/wms/CaptureCreerTransaction.png',
+          'assets/img/portfolio/wms/CaptureFacturer.png',
+          'assets/img/portfolio/wms/CaptureLivraison.png',
+          'assets/img/portfolio/wms/Capture Bons.png',
+          'assets/img/portfolio/wms/CaptureCodeQR.png',
+          'assets/img/portfolio/wms/Capturedécranproduits.png',
+          'assets/img/portfolio/wms/CaptureInventaireAdmin.png',
+          'assets/img/portfolio/wms/Capturedécranusers.png',
+        ],
+        technologies: [
+          { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+          { name: 'Spring Boot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg' },
+          { name: 'Angular 18', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg' },
+          { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' }
+        ],
+        links: [
+          { text: 'GitHub Repository', url: 'https://github.com/Touterima/WMS__Front', icon: 'bx bxl-github' }
+        ]
+      },
+      'etafakna': {
+        title: 'E_Tafa9na Note Management',
+        subtitle: 'ReactJS & Node.js Web Application',
+        description: 'A modern note management web application currently under development at E-Tafakna. Built with ReactJS frontend and Node.js/Express backend. Features include user authentication, note creation and editing, and an innovative AI-powered automatic title suggestion feature that generates note titles from content. MySQL database for reliable data storage.',
+        images: [
+          'assets/img/portfolio/etafakna/signin.png',
+          'assets/img/portfolio/etafakna/signup.png',
+          'assets/img/portfolio/etafakna/listedesnotes.jpeg',
+          'assets/img/portfolio/etafakna/ajoutNote.png',
+          'assets/img/portfolio/etafakna/modifierlanote.png',
+          'assets/img/portfolio/etafakna/collaboration.jpeg',
+          'assets/img/portfolio/etafakna/mailDeLInvitation.jpeg',
+          'assets/img/portfolio/etafakna/accepterInvitation.png',
+          'assets/img/portfolio/etafakna/refuserinvitation.png',
+          'assets/img/portfolio/etafakna/redirectionapreslacceptation.png'
+        ],
+        technologies: [
+          { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+          { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+          { name: 'Express', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
+          { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' }
+        ],
+        links: [
+          { text: 'GitHub Repository', url: 'https://github.com/Touterima/e-tafa9na-', icon: 'bx bxl-github' }
+        ]
+      },
+      'apek': {
+        title: 'APEK Association Website',
+        subtitle: 'Symfony Web Application',
+        description: 'Official website for APEK Association built with Symfony framework. Features include event management, member registration, news updates, and contact forms. Responsive design ensures great user experience across all devices.',
+        images: [
+          'assets/img/portfolio/apek/screenshot-apek1.png',
+          'assets/img/portfolio/apek/1.png',
+          'assets/img/portfolio/apek/2.png'
+        ],
+        technologies: [
+          { name: 'Symfony', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/symfony/symfony-original.svg' },
+          { name: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
+          { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+          { name: 'Bootstrap', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' }
+        ],
+        links: [
+          { text: 'GitHub Repository', url: 'https://github.com/Touterima', icon: 'bx bxl-github' }
+        ]
+      },
+      'sportfit-desktop': {
+        title: 'SportFit Desktop',
+        subtitle: 'Java Desktop Application',
+        description: 'A comprehensive fitness management desktop application built with Java. Features include workout tracking, nutrition planning, and progress monitoring. The application uses JavaFX for the user interface and follows MVC architecture pattern.',
+        images: [
+          'assets/img/portfolio/OIP.jpg',
+          'assets/img/portfolio/OIP.jpg',
+          'assets/img/portfolio/OIP.jpg'
+        ],
+        technologies: [
+          { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+          { name: 'JavaFX', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+          { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' }
+        ],
+        links: [
+          { text: 'GitHub Repository', url: 'https://github.com/Touterima', icon: 'bx bxl-github' }
+        ]
+      },
+      'sportfit-web': {
+        title: 'SportFit Web',
+        subtitle: 'Symfony Web Application',
+        description: 'Web version of the SportFit application built with Symfony framework. Provides online access to fitness tracking, workout plans, and community features. Implements RESTful API for mobile app integration.',
+        images: [
+          'assets/img/portfolio/OIP (1).jpg',
+          'assets/img/portfolio/OIP (1).jpg',
+          'assets/img/portfolio/OIP (1).jpg'
+        ],
+        technologies: [
+          { name: 'Symfony', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/symfony/symfony-original.svg' },
+          { name: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
+          { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+          { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' }
+        ],
+        links: [
+          { text: 'GitHub Repository', url: 'https://github.com/Touterima', icon: 'bx bxl-github' }
+        ]
+      },
+      'it-asset': {
+        title: 'IT Asset Management',
+        subtitle: 'Spring Boot & Angular Web Application',
+        description: 'Developed a comprehensive IT asset management system for the Faculty of Sciences of Bizerte. The application helps track and manage computer equipment, software licenses, and IT resources. Built with Spring Boot backend and Angular frontend, with MySQL database for data persistence.',
+        images: [
+          'assets/img/portfolio/3.jpg',
+          'assets/img/portfolio/3.jpg',
+          'assets/img/portfolio/3.jpg'
+        ],
+        technologies: [
+          { name: 'Spring Boot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+          { name: 'Angular', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg' },
+          { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+          { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' }
+        ],
+        links: [
+          { text: 'GitHub Repository', url: 'https://github.com/Touterima', icon: 'bx bxl-github' }
+        ]
+      },
+      'shopping': {
+        title: 'Online Shopping',
+        subtitle: 'FlutterFlow Mobile Application',
+        description: 'A modern e-commerce mobile application built with FlutterFlow. Features include product browsing, shopping cart, secure payment integration, and order tracking. Designed with a focus on user experience and smooth navigation.',
+        images: [
+          'assets/img/portfolio/R.jpg',
+          'assets/img/portfolio/R.jpg',
+          'assets/img/portfolio/R.jpg'
+        ],
+        technologies: [
+          { name: 'FlutterFlow', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
+          { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' }
+        ],
+        links: [
+          { text: 'GitHub Repository', url: 'https://github.com/Touterima', icon: 'bx bxl-github' }
+        ]
+      },
+      
+      'inceptum': {
+        title: 'InceptumJE Marketing Portfolio',
+        subtitle: 'HTML, CSS & JavaScript',
+        description: 'Marketing department portfolio website for Inceptum Junior Enterprise. Built with pure HTML, CSS, and JavaScript, showcasing the marketing team\'s work, services, and achievements. Features smooth animations and a modern, responsive design.',
+        images: [
+          'assets/img/portfolio/R.jpg',
+          'assets/img/portfolio/R.jpg',
+          'assets/img/portfolio/R.jpg'
+        ],
+        technologies: [
+          { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+          { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+          { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' }
+        ],
+        links: [
+          { text: 'GitHub Repository', url: 'https://github.com/Touterima', icon: 'bx bxl-github' }
+        ]
+      }
+    };
+
+    let currentSlide = 0;
+    let currentProject = null;
+
+    function openProjectModal(projectId) {
+      currentProject = projectsData[projectId];
+      if (!currentProject) return;
+
+      const modal = document.getElementById('projectModal');
+      document.getElementById('modalTitle').textContent = currentProject.title;
+      document.getElementById('modalDescription').textContent = currentProject.description;
+
+      // Update images
+      const sliderImages = document.querySelectorAll('.slider-image');
+      sliderImages.forEach((img, index) => {
+        if (currentProject.images[index]) {
+          img.src = currentProject.images[index];
+          img.style.display = index === 0 ? 'block' : 'none';
+          img.classList.toggle('active', index === 0);
+        }
+      });
+
+      // Create slider dots
+      const dotsContainer = document.querySelector('.slider-dots');
+      dotsContainer.innerHTML = '';
+      currentProject.images.forEach((_, index) => {
+        const dot = document.createElement('span');
+        dot.className = 'dot' + (index === 0 ? ' active' : '');
+        dot.onclick = () => goToSlide(index);
+        dotsContainer.appendChild(dot);
+      });
+
+      // Update technologies
+      const techIcons = document.getElementById('techIcons');
+      techIcons.innerHTML = '';
+      currentProject.technologies.forEach(tech => {
+        const techDiv = document.createElement('div');
+        techDiv.className = 'tech-icon';
+        techDiv.innerHTML = `
+          <img src="${tech.icon}" alt="${tech.name}">
+          <span>${tech.name}</span>
+        `;
+        techIcons.appendChild(techDiv);
+      });
+
+      // Update links
+      const linksContainer = document.getElementById('projectLinks');
+      linksContainer.innerHTML = '';
+      currentProject.links.forEach(link => {
+        const linkEl = document.createElement('a');
+        linkEl.href = link.url;
+        linkEl.className = 'project-link';
+        linkEl.target = '_blank';
+        linkEl.innerHTML = `
+          <i class="${link.icon}"></i>
+          <span>${link.text}</span>
+        `;
+        linksContainer.appendChild(linkEl);
+      });
+
+      currentSlide = 0;
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectModal() {
+      const modal = document.getElementById('projectModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function changeSlide(direction) {
+      if (!currentProject) return;
+      
+      const slides = document.querySelectorAll('.slider-image');
+      const dots = document.querySelectorAll('.dot');
+      
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      
+      currentSlide += direction;
+      
+      if (currentSlide >= currentProject.images.length) {
+        currentSlide = 0;
+      } else if (currentSlide < 0) {
+        currentSlide = currentProject.images.length - 1;
+      }
+      
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    function goToSlide(index) {
+      if (!currentProject) return;
+      
+      const slides = document.querySelectorAll('.slider-image');
+      const dots = document.querySelectorAll('.dot');
+      
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      
+      currentSlide = index;
+      
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('projectModal');
+      if (event.target === modal) {
+        closeProjectModal();
+      }
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeProjectModal();
+      }
+    });
+
+    // Arrow keys for slide navigation
+    document.addEventListener('keydown', function(event) {
+      const modal = document.getElementById('projectModal');
+      if (modal.style.display === 'block') {
+        if (event.key === 'ArrowLeft') {
+          changeSlide(-1);
+        } else if (event.key === 'ArrowRight') {
+          changeSlide(1);
+        }
+      }
+    });
+  </script>
 </body>
 
 </html>
